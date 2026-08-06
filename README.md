@@ -8,6 +8,15 @@ analyst scoped entirely to audio.
 
 Audio-only (WAV, MP3, FLAC, Ogg, AAC, m4a via ffprobe). No images/EXIF.
 
+## Overview
+
+dBA is a lightweight FastAPI microservice that sits in front of ASR systems
+(e.g., Whisper or faster-whisper). It inspects only audio file metadata (ID3
+tags, RIFF INFO/LIST chunks, structural properties via ffprobe), assigns a risk
+score based on suspicious indicators, decides allow / quarantine / reject,
+strips all metadata with ffmpeg, and returns a clean audio file plus a forensic
+JSON report.
+
 ## Why
 
 Media metadata — WAV `LIST`/`INFO` chunks (`ISFT`, `ICMT`, `INAM`), MP3 ID3
