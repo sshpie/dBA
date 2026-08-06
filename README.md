@@ -1,10 +1,8 @@
 # dBA — audio metadata firewall
 
-**dBA** (decibels, A-weighted) is a defensive microservice that sits in front of
-an ASR service (Whisper / faster-whisper) and measures what is riding in on the
-**metadata** before ASR ever hears the audio. It doesn't just strip tags — it
-detects anomalies, scores risk, and decides a disposition, like a small SOC
-analyst scoped entirely to audio.
+**dBA** (decibels, A-weighted) is a lightweight defensive **metadata firewall**
+that neutralizes attacker-controlled audio metadata before it reaches ASR
+pipelines, logs, or LLMs.
 
 Audio-only (WAV, MP3, FLAC, Ogg, AAC, m4a via ffprobe). No images/EXIF.
 
