@@ -38,6 +38,29 @@ It shines in these environments:
   - As the first hop before Whisper, Deepgram, AssemblyAI, or similar STT services
   - In Dockerized or Kubernetes setups where you want a small, focused security layer
 
+## How dBA differs from existing tools
+
+The primitives here are old — metadata stripping, content scanning, risk
+scoring. What is uncommon is the combination and the placement: a security
+control at the audio → ASR → LLM ingestion point.
+
+- **vs. metadata strippers** (`ffmpeg -map_metadata -1`, exiftool, mutagen):
+  those *remove* tags for privacy; dBA *inspects, risk-scores, and decides*
+  (allow / quarantine / reject) before stripping, and emits a forensic report —
+  a security control, not a privacy utility.
+- **vs. enterprise CDR** (Content Disarm & Reconstruction — OPSWAT, Votiro,
+  Glasswall): dBA applies the same disarm → reconstruct → report pattern, but is
+  small, open-source, and purpose-built for the **audio → ASR → LLM** path —
+  including prompt-injection-via-metadata and audio-container structural checks
+  those document-centric suites do not focus on.
+- **vs. DLP / WAF content scanning**: those inspect text payloads in transit;
+  dBA sits at **file ingestion, before transcription**, and understands audio
+  container structure (RIFF/ID3/streams), not just strings.
+- **vs. voice-AI security research**: that field targets the *waveform*
+  (adversarial perturbation, ultrasonic/inaudible injection, waveform
+  steganography). dBA defends the *container metadata* channel into the
+  pipeline — a distinct, under-addressed surface.
+
 ## Pipeline
 
 ```
