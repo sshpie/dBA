@@ -19,6 +19,25 @@ injection, PII-leak, and secret-exfil vector. dBA does three things at once:
 2. **Scores & decides** — a 0–100 risk score and an `allow` / `quarantine` / `reject` disposition.
 3. **Removes** — a re-muxed copy with *all* metadata stripped, which is what you forward to ASR (never the original).
 
+## Best places to deploy it
+
+It shines in these environments:
+
+- **Production voice AI / ASR systems** that accept user-uploaded or externally sourced audio
+  - Customer support / contact-center voice bots
+  - Voice agents (Retell, Vapi, PolyAI-style platforms, custom agents)
+  - Any app that lets users upload recordings for transcription
+- **LLM-powered conversational systems**
+  - Where transcripts or any file-derived data might reach an LLM (prompt-injection risk via metadata is the key concern)
+- **High-security or regulated domains**
+  - Healthcare voice documentation
+  - Finance / insurance call processing
+  - Enterprise media ingestion pipelines
+  - Any system that logs audio metadata or feeds it into other tools
+- **Microservice / media-processing pipelines**
+  - As the first hop before Whisper, Deepgram, AssemblyAI, or similar STT services
+  - In Dockerized or Kubernetes setups where you want a small, focused security layer
+
 ## Pipeline
 
 ```
