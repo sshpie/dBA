@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# dBA working artifacts (uploads / stripped copies)
+upload_*
+sanitized_*
+*.wav
+*.mp3
+*.flac
+*.ogg
+*.m4a
+*.aac
+
+# OS / editor
+.DS_Store
+*.swp
